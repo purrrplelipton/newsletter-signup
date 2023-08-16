@@ -1,52 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Newsletter sign-up form with success message</title>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
-
-  <!-- Sign-up form start -->
-
-  Stay updated!
-
-  Join 60,000+ product managers receiving monthly updates on:
-
-  Product discovery and building what matters
-  Measuring to ensure updates are a success
-  And much more!
-
-  Email address
-  email@company.com
-
-  Subscribe to monthly newsletter
-
-  <!-- Sign-up form end -->
-
-  <!-- Success message start -->
-
-  Thanks for subscribing!
-
-  A confirmation email has been sent to ash@loremcompany.com. 
-  Please open it and click the button inside to confirm your subscription.
-
-  Dismiss message
-
-  <!-- Success message end -->
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/favicon-32x32.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Newsletter Sign-up | Frontend Mentor</title>
+    <link rel="stylesheet" href="./reset.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <picture class="hero-container">
+        <source
+          media="(min-width: 1024px)"
+          srcset="./assets/illustration-sign-up-desktop.svg"
+        />
+        <source
+          media="(max-width: 1024px)"
+          srcset="./assets/illustration-sign-up-mobile.svg"
+        />
+        <img src="./assets//illustration-sign-up-mobile.svg" alt="" />
+      </picture>
+      <section class="content">
+        <h1>Stay updated!</h1>
+        <p class="subheading">
+          Join 60,000+ product managers receiving monthly updates on:
+        </p>
+        <ul>
+          <li><p>Product discovery and building what matters</p></li>
+          <li><p>Measuring to ensure updates are a success</p></li>
+          <li><p>And much more!</p></li>
+        </ul>
+        <form autocomplete="off" id="email-form">
+          <h2>Email address</h2>
+          <input
+            type="text"
+            name="email-field"
+            id="email-field"
+            placeholder="email@company.com"
+          />
+          <button type="submit">Subscribe to monthly newsletter</button>
+        </form>
+      </section>
+    </main>
+    <script src="./script.js"></script>
+  </body>
 </html>

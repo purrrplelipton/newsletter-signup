@@ -1,0 +1,160 @@
+body {
+  --tomato: hsl(4, 100%, 67%);
+  --dark-slate-grey: hsl(234, 29%, 20%);
+  --charcoal-grey: hsl(235, 18%, 26%);
+  --grey: hsl(231, 7%, 60%);
+
+  font-family: 'Roboto', sans-serif;
+
+  min-height: 100vh;
+  max-width: 1280px;
+  min-width: 320px;
+  margin: 0 auto;
+
+  color: var(--charcoal-grey);
+  background-color: var(--dark-slate-grey);
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.25em;
+  background-color: #fff;
+}
+
+main > * {
+  grid-column: span 12;
+}
+
+.hero-container {
+  object-fit: contain;
+}
+
+.content {
+  padding: 1.5em;
+}
+
+.content h1 {
+  font-size: 2.5em;
+  font-weight: 700;
+}
+
+.subheading {
+  margin: 1em 0;
+}
+
+.content ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.content ul li {
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+  gap: 1em;
+}
+
+.content ul li:not(:first-child, :last-child) {
+  margin: 0.75em 0;
+}
+
+.content ul li::before {
+  content: url(./assets/icon-list.svg);
+  width: 21px;
+  height: 21px;
+  margin-top: 2px;
+}
+
+form {
+  margin: 2em 0;
+}
+
+form h2 {
+  font-size: 0.8em;
+  color: var(--dark-slate-grey);
+  font-weight: 700;
+}
+
+form input {
+  border-radius: 10px;
+  border: 1px solid var(--grey);
+  width: 100%;
+  padding: 1em 1.5em;
+  margin: 0.75em 0;
+  outline: 0;
+  transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.err {
+  border-color: var(--tomato);
+  background-color: hsla(4, 100%, 67%, 0.2);
+}
+
+form button,
+.notification button {
+  color: #fff;
+  background-color: var(--dark-slate-grey);
+  border-radius: 10px;
+  font-weight: 700;
+  border: 0;
+  width: 100%;
+  padding: 1em 1.5em;
+  text-align: center;
+  margin: 0.75em 0;
+  transform: background-color 0.2s ease-in-out;
+}
+
+form button:active,
+.notification button:active {
+  background-color: var(--tomato);
+}
+
+.notification {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  padding: 1.5em;
+  background-color: #fff;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+
+.notification svg {
+  margin: auto 0 0;
+}
+
+.notification h2 {
+  font-size: 2.5em;
+  line-height: 1;
+  margin: 0.8em 0 0.6em;
+}
+
+.notification button {
+  margin: auto 0 0;
+}
+
+.notification.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.notification.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+@media screen and (min-width: 1024px) {
+  main > * {
+    grid-column: span 6;
+  }
+}
+
+*,
+*::before,
+*::after {
+  /* outline: 1px solid red; */
+}
