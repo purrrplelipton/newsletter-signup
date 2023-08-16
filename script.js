@@ -1,5 +1,8 @@
-const notification = document.createElement('aside');
-notification.setAttribute('class', 'notification show hidden');
+const notificationWrapper = document.createElement('div');
+notificationWrapper.setAttribute('class', 'notification-wrapper show hidden');
+
+const notification = document.createElement('section');
+notification.setAttribute('class', 'notification');
 
 const iconSuccess = document.createElementNS(
   'http://www.w3.org/2000/svg',
@@ -58,7 +61,7 @@ iconSuccess.appendChild(g);
 
 notification.appendChild(iconSuccess);
 
-const heading = document.createElement('h2');
+const heading = document.createElement('h1');
 heading.innerHTML = 'Thanks for subscribing!';
 
 notification.appendChild(heading);
@@ -75,14 +78,16 @@ dismissBtn.setAttribute('type', 'button');
 dismissBtn.setAttribute('id', 'dismiss-btn');
 
 dismissBtn.addEventListener('click', () => {
-  notification.classList.add('hidden');
+  notificationWrapper.classList.add('hidden');
 
   setTimeout(function () {
-    return document.body.removeChild(notification);
-  }, 400);
+    return document.body.removeChild(notificationWrapper);
+  }, 375);
 });
 
 notification.appendChild(dismissBtn);
+
+notificationWrapper.appendChild(notification);
 
 const emailRegex = /^[\w\.-]+@[\w\.-]+\.\w+$/;
 const form = document.getElementById('email-form');
@@ -99,29 +104,48 @@ emailField.addEventListener('input', function (evt) {
   }, 375);
 });
 
+const topSection = document.getElementsByClassName('top-section')[0];
+const errorMessage = document.createElement('h2');
+errorMessage.setAttribute('class', 'error-message visible hide');
+
+errorMessage.innerHTML = 'Valid email required';
+
 form.addEventListener('submit', function (event) {
   event.preventDefault();
 
   const inputValue = event.target['email-field'].value;
 
   if (emailRegex.test(inputValue)) {
+    document.body.appendChild(notificationWrapper);
+
     setTimeout(function () {
+      notificationWrapper.classList.remove('hidden');
       event.target['email-field'].value = '';
-    }, 100);
-    document.body.appendChild(notification);
+    }, 375);
 
     setTimeout(function () {
-      notification.classList.remove('hidden');
-    }, 100);
+      return notificationWrapper.classList.add('hidden');
+    }, 10375);
 
     setTimeout(function () {
-      return notification.classList.add('hidden');
-    }, 10100);
-
-    setTimeout(function () {
-      return document.body.removeChild(notification);
-    }, 10400);
+      return document.body.removeChild(notificationWrapper);
+    }, 10750);
   } else {
     event.target['email-field'].classList.add('err');
+
+    topSection.appendChild(errorMessage);
+
+    setTimeout(function () {
+      errorMessage.classList.remove('hide');
+    }, 375);
+
+    setTimeout(function () {
+      errorMessage.classList.add('hide');
+      event.target['email-field'].classList.remove('err');
+    }, 5375);
+
+    setTimeout(function () {
+      topSection.removeChild(errorMessage);
+    }, 5750);
   }
 });

@@ -4,6 +4,10 @@ body {
   --charcoal-grey: hsl(235, 18%, 26%);
   --grey: hsl(231, 7%, 60%);
 
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.25em;
+
   font-family: 'Roboto', sans-serif;
 
   min-height: 100vh;
@@ -16,9 +20,10 @@ body {
 }
 
 main {
+  grid-column: span 12;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 1.25em;
+  gap: 0 1.25em;
   background-color: #fff;
 }
 
@@ -26,8 +31,12 @@ main > * {
   grid-column: span 12;
 }
 
-.hero-container {
-  object-fit: contain;
+.hero-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right;
+  border-radius: 0 0 1.5em 1.5em;
 }
 
 .content {
@@ -69,12 +78,35 @@ main > * {
 
 form {
   margin: 2em 0;
+  overflow: hidden;
 }
 
-form h2 {
+.top-section {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.top-section h2 {
   font-size: 0.8em;
   color: var(--dark-slate-grey);
   font-weight: 700;
+}
+
+.error-message {
+  color: var(--tomato) !important;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.error-message.visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.error-message.hide {
+  transform: translateX(100%);
+  opacity: 0;
 }
 
 form input {
@@ -111,13 +143,30 @@ form button:active,
   background-color: var(--tomato);
 }
 
-.notification {
+.notification-wrapper {
+  background-color: var(--dark-slate-grey);
   position: fixed;
   inset: 0;
   margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.notification-wrapper.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.notification-wrapper.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.notification {
   padding: 1.5em;
   background-color: #fff;
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -127,7 +176,7 @@ form button:active,
   margin: auto 0 0;
 }
 
-.notification h2 {
+.notification h1 {
   font-size: 2.5em;
   line-height: 1;
   margin: 0.8em 0 0.6em;
@@ -137,24 +186,62 @@ form button:active,
   margin: auto 0 0;
 }
 
-.notification.show {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.notification.hidden {
-  transform: translateY(-100%);
-  opacity: 0;
-}
-
 @media screen and (min-width: 1024px) {
-  main > * {
+  body {
+    place-items: center;
+    font-size: 18px;
+  }
+
+  main {
+    grid-column: 2 / span 10;
+    padding: 1.5em;
+    border-radius: 1.5em;
+    margin-left: auto;
+  }
+
+  .content {
+    order: 1;
     grid-column: span 6;
+  }
+
+  .content h1 {
+    font-size: 3.5em;
+  }
+
+  .hero-container {
+    order: 2;
+    grid-column: 8 / span 5;
+  }
+
+  .hero-container img {
+    border-radius: 1.5em;
+  }
+
+  .notification {
+    font-size: 16px;
+    max-width: 448px;
+    padding: 3em;
+    border-radius: 1.5em;
+  }
+
+  .notification h1 {
+    font-size: 3.375em;
+    margin: 0.625em 0 0.375em;
+  }
+
+  .notification p {
+    font-size: 0.98em;
+    margin: 0;
+  }
+
+  .notification button {
+    margin: 3em 0 0;
   }
 }
 
-*,
-*::before,
-*::after {
-  /* outline: 1px solid red; */
+@media screen and (max-width: 1024px) {
+  .notification {
+    width: 100%;
+    height: 100%;
+  }
 }
